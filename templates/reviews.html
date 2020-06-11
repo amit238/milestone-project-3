@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% block content %}
+        {% for game_review in game_reviews %}
+            {{game_review.name}}
+            {{game_review.genre}}
+            {{game_review.rating}}
+            {{game_review.description}}
+            {{game_review.image_url}}
+            {% endfor %}
+
+{% endblock %}
