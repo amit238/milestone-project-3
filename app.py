@@ -16,10 +16,16 @@ mongo = PyMongo(app)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
+
+
 @app.route('/')
 @app.route('/get_game_reviews')
 def get_game_reviews():
     return render_template("reviews.html", game_reviews=mongo.db.game_reviews.find())
+
+@app.route('/index')
+def index():
+    return render_template('index.html', title="Home")
 
 # Adding Log in
 
