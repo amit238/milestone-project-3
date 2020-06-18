@@ -1,0 +1,30 @@
+{% extends 'base.html'%} {% block content %}
+
+<form>
+  <div class="container-fluid">
+    <div class="form-row addreview-color: ">
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Name">
+      </div>
+      <div class="col-12">
+        <select class="form-control">
+          <option>Select a Genre</option>
+          <option>Action/Adventure</option>
+          <option>Fighting</option>
+          <option>Racing</option>
+          <option>Role Playing</option>
+          <option>Shooters</option>
+          <option>Sports</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Genre">
+      </div>
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Description">
+      </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}

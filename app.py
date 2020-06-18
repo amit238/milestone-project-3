@@ -16,14 +16,16 @@ mongo = PyMongo(app)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
+@app.route('/addreview')
+def addreview():
+    return render_template('addreview.html', title="Create a review!")
 
-
-@app.route('/')
+@app.route('/reviews')
 @app.route('/get_game_reviews')
 def get_game_reviews():
     return render_template("reviews.html", game_reviews=mongo.db.game_reviews.find())
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html', title="Home")
 
@@ -34,7 +36,7 @@ def login():
     """Login handler"""
     if session.get('logged_in'):
         if session['logged_in'] is True:
-            return redirect(url_for('index', title="Sign In"))
+            return redirect(url_for('index', title="Log In"))
 
     form = LoginForm()
 
@@ -62,6 +64,7 @@ def logout():
     """Clears session and redirects to home"""
     session.clear()
     return redirect(url_for('index'))
+
 # Adding in Register form
 
 @app.route('/register', methods=['GET', 'POST'])
