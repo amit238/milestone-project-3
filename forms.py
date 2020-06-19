@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 
@@ -20,3 +20,24 @@ class RegisterForm(FlaskForm):
     email = StringField('Email Address', validators=[Length(min=6, max=35), Email()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Register')
+    
+
+class ReviewGameForm(FlaskForm):
+
+    user_created = StringField('User Created', validators=[DataRequired(), Length(min=1, max=100)])
+    
+    name = StringField('Name', validators=[DataRequired(),Length(min=1, max=150)])
+    
+    rating = TextAreaField('Rating', validators=[DataRequired(), Length(min=0, max=2)])
+    
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=2, max=1500)])
+    
+    genre = SelectField(u'Genre', choices=[
+        ('action/adventure', 'Action/Adventure'),
+        ('sports', 'Sports'),
+        ('shooters', 'Shooters'),
+        ('role-playing', 'Role-Playing'),
+        ('racing', 'Racing'),
+        ])
+    
+    submit_add = SubmitField('Add Review')

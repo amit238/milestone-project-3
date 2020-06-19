@@ -5,7 +5,10 @@ body {
   padding: 0;
   margin: 0;
 }
-
-.main-heading {
-    color: red;
+.reviews-card {
+  text-align: center;
+}
+.description-card {
+  padding-top: 1em;
+  text-align: center;
 }

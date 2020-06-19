@@ -2,7 +2,7 @@ import os
 if os.path.exists("env.py"):
   import env 
 from flask import Flask, render_template, redirect, request, url_for, flash, session
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, ReviewGameForm
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId 
 import bcrypt
@@ -21,9 +21,10 @@ def addreview():
     return render_template('addreview.html', title="Create a review!")
 
 @app.route('/reviews')
-@app.route('/get_game_reviews')
-def get_game_reviews():
-    return render_template("reviews.html", game_reviews=mongo.db.game_reviews.find())
+def reviews():
+    return render_template('reviews.html', title="Read a review!", game_reviews=mongo.db.game_reviews.find())
+    
+
 
 @app.route('/')
 def index():
@@ -91,6 +92,62 @@ def register():
         return redirect(url_for('register'))
     return render_template('register.html', title='Register', form=form)
 
+# Adding a review
+
+@app.route('/addreview', methods=['GET', 'POST'])
+def add_review():
+
+# If user is not logged in a message will appear
+
+    if 'logged_in' not in session:
+        flash('To add a review you need to sign in', 'warning')
+        return redirect(url_for('login'))
+
+# If form submits successfully
+    
+    form = ReviewGameForm()
+    if form.validate_on_submit():
+        game_reviews=mongo.db.game_reviews
+
+
+        icon = get_icon_class(request.form['category'])
+        # creating icon font awesome class
+
+        # add form content to db as a new record
+        reviews.insert_one({
+            'user_created': request.form['user_created'],
+            'name': request.form['name'],
+            'genre': request.form['genre'],
+            'rating': request.form['rating'],
+            'description': request.form['description'],
+            'icon': icon,
+            })
+        
+        flash('Your Review has been added ', 'success')
+
+        # send to my reviews template on successful add
+        return redirect(url_for('reviews'))
+
+    return render_template('addreview.html', form=form,
+                           title='Add Review')
+
+def get_icon_class(cat):
+    '''
+    function to check the review category assign by the user and to return
+    the relevant font awesome icon classes based on the category sent in
+    '''
+
+    # modify thisand the AddReviewForm class in forms.py to add new categorys
+
+    icons = {
+        'action/adventure': '',
+        'sports': '',
+        'shooters': '',
+        'racing': '',
+        'role-playing': '',
+        }
+    return icons[cat]
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

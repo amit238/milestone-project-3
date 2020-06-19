@@ -27,11 +27,11 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
           {% if session['logged_in'] == True %}
-          <a class="nav-item nav-link" href="#">Read a review</a>
+          <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
           <a class="nav-item nav-link" href="{{ url_for('addreview') }}">Create a review</a>
           <a class="nav-item nav-link" href="{{ url_for('logout') }}">Sign Out</a> 
           {% else %}
-          <a class="nav-item nav-link" href="#">Read a review</a>
+          <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
           <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
           <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a> 
           {% endif %}
