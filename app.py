@@ -16,9 +16,7 @@ mongo = PyMongo(app)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-@app.route('/addreview')
-def addreview():
-    return render_template('addreview.html', title="Create a review!")
+
 
 @app.route('/reviews')
 def reviews():
@@ -87,7 +85,7 @@ def register():
                           'email': request.form['email']})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
-        # duplicate username set flash message and reload page
+        # duplcate username set flash message and reload page
         flash('Sorry, that username is already taken - use another')
         return redirect(url_for('register'))
     return render_template('register.html', title='Register', form=form)
@@ -95,7 +93,7 @@ def register():
 # Adding a review
 
 @app.route('/addreview', methods=['GET', 'POST'])
-def add_review():
+def addreview():
 
 # If user is not logged in a message will appear
 
@@ -110,9 +108,6 @@ def add_review():
         game_reviews=mongo.db.game_reviews
 
 
-        icon = get_icon_class(request.form['category'])
-        # creating icon font awesome class
-
         # add form content to db as a new record
         reviews.insert_one({
             'user_created': request.form['user_created'],
@@ -120,7 +115,6 @@ def add_review():
             'genre': request.form['genre'],
             'rating': request.form['rating'],
             'description': request.form['description'],
-            'icon': icon,
             })
         
         flash('Your Review has been added ', 'success')
@@ -129,24 +123,9 @@ def add_review():
         return redirect(url_for('reviews'))
 
     return render_template('addreview.html', form=form,
-                           title='Add Review')
+                           title='Add a Review')
 
-def get_icon_class(cat):
-    '''
-    function to check the review category assign by the user and to return
-    the relevant font awesome icon classes based on the category sent in
-    '''
 
-    # modify thisand the AddReviewForm class in forms.py to add new categorys
-
-    icons = {
-        'action/adventure': '',
-        'sports': '',
-        'shooters': '',
-        'racing': '',
-        'role-playing': '',
-        }
-    return icons[cat]
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
