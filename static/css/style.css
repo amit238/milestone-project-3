@@ -4,11 +4,60 @@ html {
 body {
   padding: 0;
   margin: 0;
+  background-color: #221D23;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
-.reviews-card {
+
+/*----Navbar----*/
+
+/*----Homepage----*/
+
+/*.card-color {*/
+/*  background-color: #4F3824;*/
+/*}*/
+
+
+.card-position {
+  text-align: center;
+  padding-top: 10em;
+}
+
+.bg-color {
+  background-color: #4F3824;
+}
+
+.title {
+  color: #DDB967;
+}
+
+/*----Add Review----*/
+
+/*.addreview-form {*/
+/*  background-color: #4F3824;*/
+/*}*/
+
+.center-header {
   text-align: center;
 }
-.description-card {
+
+
+/*----Register----*/
+
+
+/*-also login-*/
+.color-center {
+  color: #DDB967;
+  text-align: center;
+}
+
+.padding-top {
   padding-top: 1em;
-  text-align: center;
+}
+
+/*.button {*/
+/*  color: #D1603D;*/
+/*}*/
+
+.border-box {
+  border-radius: 1rem;
 }

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block nav_login %}active{% endblock %}
 {% block content %}
-    <h1>Sign In</h1>
+    <h1 class="color-center padding-top">Sign In</h1>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
@@ -13,24 +13,21 @@
     {% endwith %}
     <form action="" method="post">
         {{ form.csrf_token }}
-        <p>
+        <p class="color-center border-box padding-top">
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}<br>
             {% for error in form.username.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
-        <p>
+        <p class="color-center border-box">
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
             {% for error in form.password.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.remember_me() }} {{ form.remember_me.label }}
-        </p>
-        <p>{{ form.submit() }}</p>
+        <p class="color-center border-box">{{ form.submit() }}</p>
     </form>
-    <p>Not registered? Then please <a href="{{ url_for('register') }}">register here</a></p>
+    <p class="color-center">Not registered? Then please <a href="{{ url_for('register') }}">register here</a></p>
 {% endblock %}

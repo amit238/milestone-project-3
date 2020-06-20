@@ -109,7 +109,7 @@ def addreview():
 
 
         # add form content to db as a new record
-        reviews.insert_one({
+        game_reviews.insert_one({
             'user_created': request.form['user_created'],
             'name': request.form['name'],
             'genre': request.form['genre'],

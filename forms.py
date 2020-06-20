@@ -28,10 +28,6 @@ class ReviewGameForm(FlaskForm):
     
     name = StringField('Name', validators=[DataRequired(),Length(min=1, max=150)])
     
-    rating = TextAreaField('Rating', validators=[DataRequired(), Length(min=0, max=2)])
-    
-    description = TextAreaField('Description', validators=[DataRequired(), Length(min=2, max=1500)])
-    
     genre = SelectField(u'Genre', choices=[
         ('action/adventure', 'Action/Adventure'),
         ('sports', 'Sports'),
@@ -39,5 +35,20 @@ class ReviewGameForm(FlaskForm):
         ('role-playing', 'Role-Playing'),
         ('racing', 'Racing'),
         ])
+    
+    rating = SelectField(u'Rating', choices=[
+        ('1'),
+        ('2'),
+        ('3'),
+        ('4'),
+        ('5'),
+        ('6'),
+        ('7'),
+        ('8'),
+        ('9'),
+        ('10'),
+        ])
+    
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=2, max=1500)])
     
     submit_add = SubmitField('Add Review')

@@ -1,8 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 
 <div class="card mb-4">
-    <div class="card-header"><span class="review-title "><strong>Add a Game Review</strong></span></div>
-    <div class="card-body">
+    <div class="card-header addreview-form center-header"><span class="review-title"><strong>Add a Game Review</strong></span></div>
+    <div class="card-body addreview-form">
         <div class="row">
             <div class="col-12">
                 <!--wtform to add new review to the db-->
@@ -39,34 +39,6 @@
                         </div>
 
                         <div class="form-group">
-                                {{ form.rating.label(class="form-control-label") }}
-                                {% if form.rating.errors %}
-                                {{ form.rating(class="form-control form-control is-invalid") }}
-                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
-                                    {% for error in form.rating.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                {% else %}
-                                {{ form.rating(class="form-control form-control") }}
-                                {% endif %}
-                            </div>
-
-                            <div class="form-group">
-                                {{ form.description.label(class="form-control-label") }}
-                                {% if form.description.errors %}
-                                {{ form.description(class="form-control form-control is-invalid") }}
-                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
-                                    {% for error in form.description.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                {% else %}
-                                {{ form.description(class="form-control form-control") }}
-                                {% endif %}
-                            </div>
-
-                            <div class="form-group">
                                 {{ form.genre.label(class="form-control-label") }}
                                 {% if form.genre.errors %}
                                 {{ form.genre(class="form-control form-control is-invalid") }}
@@ -80,6 +52,33 @@
                                 {% endif %}
                             </div>
 
+                            <div class="form-group">
+                                {{ form.rating.label(class="form-control-label") }}
+                                {% if form.rating.errors %}
+                                {{ form.rating(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
+                                    {% for error in form.rating.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.rating(class="form-control form-control") }}
+                                {% endif %}
+                            </div>
+                            
+                             <div class="form-group">
+                                {{ form.description.label(class="form-control-label") }}
+                                {% if form.description.errors %}
+                                {{ form.description(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
+                                    {% for error in form.description.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.description(class="form-control form-control") }}
+                                {% endif %}
+                            </div>
 
                     </fieldset>
                     <div class="form-group"><!--submitting new review form-->
