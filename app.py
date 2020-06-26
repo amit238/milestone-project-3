@@ -24,9 +24,18 @@ def reviews():
     
 
 
+
+
+
+
 @app.route('/')
 def index():
     return render_template('index.html', title="Home")
+
+
+
+
+
 
 # Adding Log in
 
@@ -58,11 +67,18 @@ def login():
     return render_template("login.html", title="Sign In", form=form)
 
 
+
+
+
 @app.route('/logout')
 def logout():
     """Clears session and redirects to home"""
     session.clear()
     return redirect(url_for('index'))
+
+
+
+
 
 # Adding in Register form
 
@@ -90,27 +106,32 @@ def register():
         return redirect(url_for('register'))
     return render_template('register.html', title='Register', form=form)
 
+
+
+
+
 # Adding a review
 
 @app.route('/addreview', methods=['GET', 'POST'])
 def addreview():
 
-# If user is not logged in a message will appear
+   # If user is not logged in a message will appear
 
     if 'logged_in' not in session:
         flash('To add a review you need to sign in', 'warning')
         return redirect(url_for('login'))
 
-# If form submits successfully
+   # If form submits successfully
     
-    form = ReviewGameForm()
-    if form.validate_on_submit():
+    form = ReviewGameForm(request.form)
+    if request.method == 'POST':
         game_reviews=mongo.db.game_reviews
-
-
+        print('inside')
+        print('rating:' + request.form['rating'])
+        # import pdb; pdb.set_trace()
         # add form content to db as a new record
         game_reviews.insert_one({
-            'user_created': request.form['user_created'],
+            'user_created': session['username'],
             'name': request.form['name'],
             'genre': request.form['genre'],
             'rating': request.form['rating'],
@@ -126,7 +147,58 @@ def addreview():
                            title='Add a Review')
 
 
+
+
+
+# Editing a review
+
+@app.route('/editreview/<id>', methods=['GET', 'POST'])
+def edit_review(id):
     
+    # Users can edit a review if logged in
+
+    if 'logged_in' not in session:
+        # if a user trys to go to edit review without been logged in
+
+        flash('You will need to log in to edit a review', 'warning')
+        return redirect(url_for('login'))  # sending to log in
+
+    one_review = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
+    # retrieving record from db
+
+    # if a user trys to go to edit review that they don't own
+    if one_review['username'] != session['username']:
+        flash('You do  not own this review and cannot edit it. ',
+              'warning')
+        return redirect(url_for('login'))  # sending to log in
+
+    form = ReviewGameForm(data=one_review)
+
+    if form.validate_on_submit():  # if form submits successfully
+        game_reviews = mongo.db.game_reviews
+
+
+        # add form content to db as a new record
+        game_reviews.update_one({'_id': ObjectId(id)}, {'$set': {
+            'name': request.form['name'],
+            'genre': request.form['genre'],
+            'rating': request.form['rating'],
+            'description': request.form['description'],
+            }})
+
+        flash('Your review has been updated!', 'success')
+
+        # send to my review template on successful addupdate
+        return redirect(url_for('reviews', id=id))
+
+    return render_template('editreview.html', form=form,
+                           title='Edit a  Review')
+
+    
+
+
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

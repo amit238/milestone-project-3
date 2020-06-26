@@ -1,40 +1,39 @@
 {% extends "base.html" %} {% block nav_index %}active{% endblock %} {% block content %}
-<div class="container-fluid">
-    <div class="row card-position">
-        <div class="col-sm-6">
-            <div class="card bg-color">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <h1 class="title"><strong>Welcome to GameScan.</strong></h1>
-                            <span class="title">Wondering what game to get next? View what gamers think about a game to help you decide!</span>
-                            <button type="button">View a review</button>
-                        </div>
-                        <div class="col-6 image-right">
-                            <img class="card-img-top" src="static/img/night.jpg" alt="Gaming at night">
-                        </div>
+<div class="background">
+    <div class="container fade-in">
+        <div class="row">
+            <div class="col-12 homepage">
+                <div class="card homepage-card">
+                    <div class="card-body">
+                        <h1 class="welcome">Welcome to GameScan</h1>
                     </div>
                 </div>
             </div>
         </div>
-            <div class="row card-position">
-        <div class="col-sm-6">
-            <div class="card bg-color">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6 image-left">
-                            <img class="card-img-top" src="static/img/action.jpg" alt="Action Game">
-                        </div>
-                        <div class="col-6">
-                            <h1 class="title">Want to Review?</h1>
-                            <span class="title"><strong>Completed a game and want to review it?</strong></span>
-                            <button type="button">Write a review</button>
-                        </div>
+        <div class="row padding-text-align">
+            <div class="col-12 col-lg-4">
+                <div class="card homepage-card">
+                    <div class="card-body">
+                        <p>Want to see some reviews on a game?</p>
+                        <button href="{{ url_for('reviews') }}" type="button" class="btn btn-dark">Read a Review</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card homepage-card">
+                    <div class="card-body">
+                        <p>Played a game that you want to review?</p>
+                        <button href="{{ url_for('addreview') }}" type="button" class="btn btn-dark">Write a review </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card homepage-card">
+                    <div class="card-body">
+                        <p><strong>Not Registered? Register to GameScan today</strong></p>
+                        <button href="{{ url_for('register') }}" type="button" class="btn btn-dark">Register Here</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-</div>
-{% endblock %}
+        {% endblock %}

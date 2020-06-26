@@ -37,18 +37,19 @@ class ReviewGameForm(FlaskForm):
         ])
     
     rating = SelectField(u'Rating', choices=[
-        ('1'),
-        ('2'),
-        ('3'),
-        ('4'),
-        ('5'),
-        ('6'),
-        ('7'),
-        ('8'),
-        ('9'),
-        ('10'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+        ('10', '10'),
         ])
     
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=2, max=1500)])
     
     submit_add = SubmitField('Add Review')
+    submit_edit = SubmitField('Update Review')

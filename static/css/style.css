@@ -1,52 +1,96 @@
 html {
-  font-size: 10px;
+  font-size: 100%;
 }
+
 body {
   padding: 0;
   margin: 0;
-  background-color: #221D23;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  background-color: #222233;
+  font-family: 'Poppins', sans-serif;
+  ;
 }
 
 /*----Navbar----*/
 
 /*----Homepage----*/
 
-/*.card-color {*/
-/*  background-color: #4F3824;*/
-/*}*/
-
-
-.card-position {
+.padding-text-align {
+  padding-top: 5em;
   text-align: center;
-  padding-top: 10em;
 }
 
-.bg-color {
-  background-color: #4F3824;
+.homepage-card {
+  font-size: large;
+  background-color: rgba(34, 34, 51, 0.5);
+  border-radius: 2em;
+  animation: fade-cards-in 2s ease-out;
+  margin-bottom: 5px;
+  color: #AACCFF
 }
 
-.title {
-  color: #DDB967;
+@keyframes fade-cards-in {
+  0% {
+    opacity: .5;
+    transform: translateY(30px);
+  }
+  80% {
+    transform: translateY(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.background {
+  background-image: url('../img/night.jpg');
+  background-color: #222233;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.homepage {
+  padding-top: 15em;
+  text-align: center;
 }
 
 /*----Add Review----*/
+/*-some css also in reviews.html to stop repeating-*/
 
-/*.addreview-form {*/
-/*  background-color: #4F3824;*/
-/*}*/
+.form-bg {
+  background-color: #222233;
+  margin-top: 2em;
+}
 
+.form-text {
+  color: #AACCFF;
+  font-size: large;
+}
+
+.form-btn {
+  text-align: center;
+  background-color: #222233;
+}
 .center-header {
   text-align: center;
 }
 
+/*----Reviews----*/
+
+.center {
+  text-align: center;
+}
+
+.description {
+  margin-top: 1em;
+}
 
 /*----Register----*/
+/*-some css also in login.html to stop repeating-*/
 
-
-/*-also login-*/
 .color-center {
-  color: #DDB967;
+  color: #AACCFF;
   text-align: center;
 }
 
@@ -54,9 +98,6 @@ body {
   padding-top: 1em;
 }
 
-/*.button {*/
-/*  color: #D1603D;*/
-/*}*/
 
 .border-box {
   border-radius: 1rem;

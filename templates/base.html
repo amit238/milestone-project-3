@@ -11,6 +11,7 @@
   {% endif %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
   <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename='img/favicon.ico') }}" />
 </head>
@@ -28,7 +29,7 @@
         <div class="navbar-nav ml-auto">
           {% if session['logged_in'] == True %}
           <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
-          <a class="nav-item nav-link" href="{{ url_for('addreview') }}">Create a review</a>
+          <a class="nav-item nav-link" href="{{ url_for('addreview') }}">Write a review</a>
           <a class="nav-item nav-link" href="{{ url_for('logout') }}">Sign Out</a> 
           {% else %}
           <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
