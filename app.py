@@ -153,7 +153,7 @@ def addreview():
 # Editing a review
 
 @app.route('/editreview/<id>', methods=['GET', 'POST'])
-def edit_review(id):
+def editreview(id):
     
     # Users can edit a review if logged in
 
@@ -163,16 +163,16 @@ def edit_review(id):
         flash('You will need to log in to edit a review', 'warning')
         return redirect(url_for('login'))  # sending to log in
 
-    one_review = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
+    a_reivew = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
     # retrieving record from db
 
     # if a user trys to go to edit review that they don't own
-    if one_review['username'] != session['username']:
+    if a_reivew['user_created'] != session['user_created']:
         flash('You do  not own this review and cannot edit it. ',
               'warning')
         return redirect(url_for('login'))  # sending to log in
 
-    form = ReviewGameForm(data=one_review)
+    form = ReviewGameForm(data=a_reivew)
 
     if form.validate_on_submit():  # if form submits successfully
         game_reviews = mongo.db.game_reviews
@@ -195,8 +195,31 @@ def edit_review(id):
                            title='Edit a  Review')
 
     
+# Delete a review
 
+# If user is logged in and wants to delete a review
 
+@app.route('/delete/<id>', methods=['GET', 'POST'])
+def deletereview(id):
+    
+    if 'logged_in' not in session:
+     
+        flash('To delete a review you will need to log in', 'warning')
+        return redirect(url_for('login'))
+
+    a_reivew = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
+
+    #  IF user did not write the review they cannot delete or edit it
+    if a_reivew['user_created'] != session['user_created']:
+        flash('You cannot edit or delete this.',
+              'warning')
+
+        return redirect(url_for('index')) 
+
+    flash("Your review has been removed!.",
+          'warning')
+    mongo.db.reviews.delete_one({'_id': ObjectId(id)})
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':

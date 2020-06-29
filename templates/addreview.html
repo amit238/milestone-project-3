@@ -1,6 +1,6 @@
 {% extends 'base.html'%} {% block content %}
 
-<div class="card mb-4 form-bg">
+<div class="card mb-4 form-bg thick-border">
     <div class="card-header center-header form-text"><span class="review-title"><strong>Add a Game Review</strong></span></div>
     <div class="card-body">
         <div class="row">
@@ -68,7 +68,7 @@
 
                     </fieldset>
                     <div class="form-group form-btn"><!--submitting new review form-->
-                        {{ form.submit_add(class="btn btn-info") }}
+                        {{ form.submit_add(class="btn btn-dark") }}
                     </div>
                 </form>
 

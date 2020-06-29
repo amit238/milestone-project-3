@@ -15,7 +15,7 @@
                 <div class="card homepage-card">
                     <div class="card-body">
                         <p>Want to see some reviews on a game?</p>
-                        <button href="{{ url_for('reviews') }}" type="button" class="btn btn-dark">Read a Review</button>
+                        <a href="{{ url_for('reviews') }}" ><button method="get" type="submit" type="button" class="btn btn-dark">Read a Review</button></a>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="card homepage-card">
                     <div class="card-body">
                         <p>Played a game that you want to review?</p>
-                        <button href="{{ url_for('addreview') }}" type="button" class="btn btn-dark">Write a review </button>
+                        <a href="{{ url_for('addreview') }}"><button type="button" class="btn btn-dark">Write a review </button></a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="card homepage-card">
                     <div class="card-body">
                         <p><strong>Not Registered? Register to GameScan today</strong></p>
-                        <button href="{{ url_for('register') }}" type="button" class="btn btn-dark">Register Here</button>
+                        <a href="{{ url_for('register') }}"><button type="button" class="btn btn-dark">Register Here</button></a>
                     </div>
                 </div>
             </div>
