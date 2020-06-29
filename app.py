@@ -5,6 +5,7 @@ from flask import Flask, render_template, redirect, request, url_for, flash, ses
 from forms import LoginForm, RegisterForm, ReviewGameForm
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId 
+import re
 import bcrypt
 
 app = Flask(__name__)
@@ -167,7 +168,7 @@ def editreview(id):
     # retrieving record from db
 
     # if a user trys to go to edit review that they don't own
-    if a_reivew['user_created'] != session['user_created']:
+    if a_reivew['user_created'] != session['username']:
         flash('You do  not own this review and cannot edit it. ',
               'warning')
         return redirect(url_for('login'))  # sending to log in
@@ -210,7 +211,7 @@ def deletereview(id):
     a_reivew = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
 
     #  IF user did not write the review they cannot delete or edit it
-    if a_reivew['user_created'] != session['user_created']:
+    if a_reivew['user_created'] != session['username']:
         flash('You cannot edit or delete this.',
               'warning')
 
@@ -221,6 +222,11 @@ def deletereview(id):
     mongo.db.reviews.delete_one({'_id': ObjectId(id)})
     return redirect(url_for('index'))
 
+# Adding an error page
+
+@app.errorhandler(404)
+def handle_404(exception):
+    return render_template('404.html', exception=exception)
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

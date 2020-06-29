@@ -16,15 +16,17 @@
         <p class="color-center border-box padding-top">
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}<br>
+            <!--Error if username is typed incorrect-->
             {% for error in form.username.errors %}
-                <span style="color: red;">{{ error }}</span>
+                <span style="color: yellow;">{{ error }}</span>
             {% endfor %}
         </p>
         <p class="color-center border-box">
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
             {% for error in form.password.errors %}
-                <span style="color: red;">{{ error }}</span>
+            <!--Error if password is typed incorrect-->
+                <span style="color: yellow;">{{ error }}</span>
             {% endfor %}
         </p>
         <p class="color-center border-box">{{ form.submit() }}</p>

@@ -26,6 +26,7 @@
   </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
+          <!--Being 'logged in' will show different links-->
           {% if session['logged_in'] == True %}
           <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
           <a class="nav-item nav-link" href="{{ url_for('addreview') }}">Write a review</a>
