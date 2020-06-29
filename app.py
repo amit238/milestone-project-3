@@ -193,7 +193,7 @@ def editreview(id):
         return redirect(url_for('reviews', id=id))
 
     return render_template('editreview.html', form=form,
-                           title='Edit a  Review')
+                           title='Edit a  Review!')
 
     
 # Delete a review
