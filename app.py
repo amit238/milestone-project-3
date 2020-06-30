@@ -186,7 +186,6 @@ def editreview(id):
             'rating': request.form['rating'],
             'description': request.form['description'],
             }})
-
         flash('Your review has been updated!', 'success')
 
         # send to my review template on successful addupdate
@@ -200,7 +199,7 @@ def editreview(id):
 
 # If user is logged in and wants to delete a review
 
-@app.route('/delete/<id>', methods=['GET', 'POST'])
+@app.route('/deletereview/<id>', methods=['GET', 'POST'])
 def deletereview(id):
     
     if 'logged_in' not in session:
@@ -208,20 +207,30 @@ def deletereview(id):
         flash('To delete a review you will need to log in', 'warning')
         return redirect(url_for('login'))
 
-    a_reivew = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
 
-    #  IF user did not write the review they cannot delete or edit it
-    if a_reivew['user_created'] != session['username']:
-        flash('You cannot edit or delete this.',
-              'warning')
-
-        return redirect(url_for('index')) 
-
-    flash("Your review has been removed!.",
-          'warning')
-    mongo.db.reviews.delete_one({'_id': ObjectId(id)})
+    flash("Your review has been removed!.")
+    mongo.db.game_reviews.delete_one({'_id': ObjectId(id)})
     return redirect(url_for('index'))
 
+# Adding a Search bar to my reviews page
+
+@app.route('/search')
+def search():
+    """Provides logic for search bar"""
+    orig_query = request.args['query']
+    # using regular expression setting option for any case
+    query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
+    # find instances of the entered word in title, tags or ingredients
+    results = mongo.db.game_reviews.find({
+        '$or': [
+            {'name': query},
+            {'genre': query},
+            {'rating': query},
+            {'description': query},
+        ]
+    })
+    return render_template('search.html', query=orig_query, results=results)
+    
 # Adding an error page
 
 @app.errorhandler(404)

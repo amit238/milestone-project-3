@@ -14,7 +14,7 @@
       <div class="col-12 form-text description"><span class="review-title">Description:</span> <i aria-hidden="true"></i> <span class="low-weight"><br>{{ game_review.description }}
         </span> </div>
     </div>
-    {% if session['logged_in'] == True %}
+    {% if session['username'] == game_review.user_created %}
     <div class="row padding-top">
       <div class="col-6"><a href=" {{ (url_for('editreview', id=game_review._id )) }} " class="btn btn-dark" title="Edit Review">Edit
       Review</a></div>

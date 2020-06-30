@@ -126,3 +126,11 @@ body {
 .border-box {
   border-radius: 1rem;
 }
+
+
+
+
+.message {
+  color: white;
+  padding-left: 3rem;
+}
