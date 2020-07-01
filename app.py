@@ -216,21 +216,17 @@ def deletereview(id):
 
 @app.route('/search')
 def search():
-    """Provides logic for search bar"""
     orig_query = request.args['query']
-    # using regular expression setting option for any case
-    query = {'$regex': re.compile('.*{}.*'.format(orig_query))}
-    # find instances of the entered word in title, tags or ingredients
-    results = mongo.db.game_reviews.find({
-        '$or': [
-            {'name': query},
-            {'genre': query},
-            {'rating': query},
-            {'description': query},
-        ]
-    })
-    return render_template('search.html', query=orig_query, results=results)
-    
+    name = mongo.db.game_reviews.find({ "name": {"$regex": orig_query}})
+    genre = mongo.db.game_reviews.find({ "genre": {"$regex": orig_query}})
+    rating = mongo.db.game_reviews.find({ "rating": {"$regex": orig_query}})
+    description = mongo.db.game_reviews.find({ "description": {"$regex": orig_query}})
+    return render_template('search.html', name = name, genre = genre, rating = rating, description = description, query=orig_query)
+
+
+
+
+
 # Adding an error page
 
 @app.errorhandler(404)

@@ -1,28 +1,39 @@
 {% extends 'base.html'%} {% block content %} {% for game_review in game_reviews %}
-
-<div class="card mb-4 form-bg center">
-  <div class="card-header form-text"><span class="review-title ">Reviewed By: </span>
-    <i class="fa fa-user-circle" aria-hidden="true"></i> {{ game_review.user_created}} </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-12 col-md-4 form-text"><span class="review-title ">Name:</span> <span class="low-weight"> {{ game_review.name}} </span></div>
-      <div class="col-12 col-md-4 form-text"><span class="review-title "> Genre:</span> <span class="low-weight"> {{ game_review.genre }}</span></div>
-      <div class="col-12 col-md-4 form-text"><span class="review-title">Rating:</span> <i aria-hidden="true"></i> <span class="low-weight"> {{ game_review.rating }}
-        </span> </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <form class="input-group mb-3" action="{{ url_for('search') }}">
+        <input class="form-control" type="text" name="query" />
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">Find Review</button>
+        </div>
+      </form>
     </div>
-    <div class="row">
-      <div class="col-12 form-text description"><span class="review-title">Description:</span> <i aria-hidden="true"></i> <span class="low-weight"><br>{{ game_review.description }}
+  </div>
+  <div class="card mb-4 form-bg center">
+    <div class="card-header form-text"><span class="review-title ">Reviewed By: </span>
+      <i class="fa fa-user-circle" aria-hidden="true"></i> {{ game_review.user_created}} </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-md-4 form-text"><span class="review-title ">Name:</span> <span class="low-weight"> {{ game_review.name}} </span></div>
+        <div class="col-12 col-md-4 form-text"><span class="review-title "> Genre:</span> <span class="low-weight"> {{ game_review.genre }}</span></div>
+        <div class="col-12 col-md-4 form-text"><span class="review-title">Rating:</span> <i aria-hidden="true"></i> <span class="low-weight"> {{ game_review.rating }}
         </span> </div>
-    </div>
-    {% if session['username'] == game_review.user_created %}
-    <div class="row padding-top">
-      <div class="col-6"><a href=" {{ (url_for('editreview', id=game_review._id )) }} " class="btn btn-dark" title="Edit Review">Edit
-      Review</a></div>
-      <div class="col-6">
-        <a href=" {{ (url_for('deletereview', id=game_review._id )) }} " class="btn btn-danger" title="Delete Review">Delete Review</a>
       </div>
+      <div class="row">
+        <div class="col-12 form-text description"><span class="review-title">Description:</span> <i aria-hidden="true"></i> <span class="low-weight"><br>{{ game_review.description }}
+        </span> </div>
+      </div>
+      {% if session['username'] == game_review.user_created %}
+      <div class="row padding-top">
+        <div class="col-6"><a href=" {{ (url_for('editreview', id=game_review._id )) }} " class="btn btn-dark" title="Edit Review">Edit
+      Review</a></div>
+        <div class="col-6">
+          <a href=" {{ (url_for('deletereview', id=game_review._id )) }} " class="btn btn-danger" title="Delete Review">Delete Review</a>
+        </div>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
 </div>
 
