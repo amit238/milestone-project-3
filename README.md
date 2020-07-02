@@ -2,7 +2,7 @@
 
 Milestone Project 3 - Data Centric Development
 
-This website is a game review website, where you can sign up, login, write and view a review. You can find a demo to the website [here.]()
+This website is a game review website, where you can sign up, login, write and view a review. You can find a demo to the website [here.](http://game-scan-flask-mongo.herokuapp.com/)
 
 
 # UX
@@ -178,6 +178,8 @@ To clone my webpage the steps were as followed:
 ### Media Used
 
 All images used was from google images
+
+I used [Favicon](https://realfavicongenerator.net/) to add an icon for my navbar and title.
 
 All the descriptions i have on my reviews page are from [IGN](https://www.ign.com/uk)
 

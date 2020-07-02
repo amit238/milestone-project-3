@@ -76,6 +76,7 @@ def login():
 def logout():
     """Clears session and redirects to home"""
     session.clear()
+    flash('You have successfully logged out!')
     return redirect(url_for('index'))
 
 
