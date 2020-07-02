@@ -101,6 +101,8 @@ def register():
                           'password': hash_pass,
                           'email': request.form['email']})
             session['username'] = request.form['username']
+            session['logged_in'] = True
+            # Logs user in after registering
             return redirect(url_for('index'))
         # duplcate username set flash message and reload page
         flash('Sorry, that username is already taken - use another')
@@ -116,7 +118,7 @@ def register():
 @app.route('/addreview', methods=['GET', 'POST'])
 def addreview():
 
-   # If user is not logged in a message will appear
+   # If user gets onto the add page but not logged in
 
     if 'logged_in' not in session:
         flash('To add a review you need to sign in', 'warning')
@@ -156,22 +158,10 @@ def addreview():
 @app.route('/editreview/<id>', methods=['GET', 'POST'])
 def editreview(id):
     
-    # Users can edit a review if logged in
-
-    if 'logged_in' not in session:
-        # if a user trys to go to edit review without been logged in
-
-        flash('You will need to log in to edit a review', 'warning')
-        return redirect(url_for('login'))  # sending to log in
 
     a_reivew = mongo.db.game_reviews.find_one({'_id': ObjectId(id)})
     # retrieving record from db
 
-    # if a user trys to go to edit review that they don't own
-    if a_reivew['user_created'] != session['username']:
-        flash('You do  not own this review and cannot edit it. ',
-              'warning')
-        return redirect(url_for('login'))  # sending to log in
 
     form = ReviewGameForm(data=a_reivew)
 
@@ -201,12 +191,6 @@ def editreview(id):
 
 @app.route('/deletereview/<id>', methods=['GET', 'POST'])
 def deletereview(id):
-    
-    if 'logged_in' not in session:
-     
-        flash('To delete a review you will need to log in', 'warning')
-        return redirect(url_for('login'))
-
 
     flash("Your review has been removed!.")
     mongo.db.game_reviews.delete_one({'_id': ObjectId(id)})
@@ -214,20 +198,30 @@ def deletereview(id):
 
 # Adding a Search bar to my reviews page
 
-@app.route('/search')
+
+@app.route('/search', methods=['POST'])
 def search():
-    orig_query = request.args['query']
-    name = mongo.db.game_reviews.find({ "name": {"$regex": orig_query}})
-    genre = mongo.db.game_reviews.find({ "genre": {"$regex": orig_query}})
-    rating = mongo.db.game_reviews.find({ "rating": {"$regex": orig_query}})
-    description = mongo.db.game_reviews.find({ "description": {"$regex": orig_query}})
-    return render_template('search.html', name = name, genre = genre, rating = rating, description = description, query=orig_query)
+    
+    ''' 
+    The below line of code creates an index on each of the fields in the collection,
+    allowing us to perform a text search on them
+    '''
+    mongo.db.game_reviews.create_index([('description', 'text'), ('name','text'), ('genre', 'text')])
+    
+    
+    ''' 
+    The below line of code drops all indexes on a collection.
+    '''
+    # mongo.db.game_reviews.drop_indexes()
+    
+    query = request.form.get('query')
+    reviews = mongo.db.game_reviews.find({'$text': {'$search': query}})
+    return render_template('reviews.html', reviews=reviews, type='search', query=query)
 
 
 
 
-
-# Adding an error page
+# Adding a 404 error page
 
 @app.errorhandler(404)
 def handle_404(exception):

@@ -1,80 +1,64 @@
 {% extends 'base.html'%} {% block content %}
-<div class="card mb-4 form-bg thick-border">
-    <div class="card-header center-header form-text"><span class="review-title"><strong>Add a Game Review</strong></span></div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-12">
-                <!--wtform to add new review to the db-->
-                <form method="POST" action="">
-                    {{ form.hidden_tag() }}
-                    <fieldset class="form-group">
+<div class="container-fluid">
+    <div class="card mb-4 form-bg thick-border">
+        <div class="card-header center-header form-text"><span class="review-title"><strong>Edit a Game Review</strong></span></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <!--wtform to add new review to the db-->
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
 
-                        <div class="form-group form-text">
-                            {{ form.name.label(class="form-control-label") }}
-                            {% if form.name.errors %}<!--checking for invalid input and message user-->
-                            {{ form.name(class="form-control form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.name.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.name(class="form-control form-control") }}
-                            {% endif %}
-                        </div>
-
-                        <div class="form-group form-text">
-                                {{ form.genre.label(class="form-control-label") }}
-                                {% if form.genre.errors %}
-                                {{ form.genre(class="form-control form-control is-invalid") }}
-                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
-                                    {% for error in form.genre.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
+                            <div class="form-group form-text">
+                                {{ form.name.label(class="form-control-label") }} {% if form.name.errors %}
+                                <!--checking for invalid input and message user-->
+                                {{ form.name(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.name.errors %}
+                                    <span>{{ error }}</span> {% endfor %}
                                 </div>
-                                {% else %}
-                                {{ form.genre(class="form-control form-control") }}
-                                {% endif %}
+                                {% else %} {{ form.name(class="form-control form-control") }} {% endif %}
                             </div>
 
                             <div class="form-group form-text">
-                                {{ form.rating.label(class="form-control-label") }}
-                                {% if form.rating.errors %}
-                                {{ form.rating(class="form-control form-control is-invalid") }}
-                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
+                                {{ form.genre.label(class="form-control-label") }} {% if form.genre.errors %} {{ form.genre(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    <!--checking for invalid input and message user-->
+                                    {% for error in form.genre.errors %}
+                                    <span>{{ error }}</span> {% endfor %}
+                                </div>
+                                {% else %} {{ form.genre(class="form-control form-control") }} {% endif %}
+                            </div>
+
+                            <div class="form-group form-text">
+                                {{ form.rating.label(class="form-control-label") }} {% if form.rating.errors %} {{ form.rating(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    <!--checking for invalid input and message user-->
                                     {% for error in form.rating.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
+                                    <span>{{ error }}</span> {% endfor %}
                                 </div>
-                                {% else %}
-                                {{ form.rating(class="form-control form-control") }}
-                                {% endif %}
+                                {% else %} {{ form.rating(class="form-control form-control") }} {% endif %}
                             </div>
-                            
-                             <div class="form-group form-text">
-                                {{ form.description.label(class="form-control-label") }}
-                                {% if form.description.errors %}
-                                {{ form.description(class="form-control form-control is-invalid") }}
-                                <div class="invalid-feedback"><!--checking for invalid input and message user-->
+
+                            <div class="form-group form-text">
+                                {{ form.description.label(class="form-control-label") }} {% if form.description.errors %} {{ form.description(class="form-control form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    <!--checking for invalid input and message user-->
                                     {% for error in form.description.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
+                                    <span>{{ error }}</span> {% endfor %}
                                 </div>
-                                {% else %}
-                                {{ form.description(class="form-control form-control") }}
-                                {% endif %}
+                                {% else %} {{ form.description(class="form-control form-control") }} {% endif %}
                             </div>
-                    </fieldset>
-                    <div class="form-group form-btn"><!--submitting new review form-->
-                        {{ form.submit_edit(class="btn btn-dark") }}
-                    </div>
-                </form>
-
-
+                        </fieldset>
+                        <div class="form-group form-btn">
+                            <!--submitting new review form-->
+                            {{ form.submit_edit(class="btn btn-dark") }}
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
-
     </div>
 </div>
 

@@ -1,15 +1,6 @@
 {% extends 'base.html'%} {% block content %} {% for game_review in game_reviews %}
+
 <div class="container">
-  <div class="row">
-    <div class="col-lg-4">
-      <form class="input-group mb-3" action="{{ url_for('search') }}">
-        <input class="form-control" type="text" name="query" />
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit">Find Review</button>
-        </div>
-      </form>
-    </div>
-  </div>
   <div class="card mb-4 form-bg center">
     <div class="card-header form-text"><span class="review-title ">Reviewed By: </span>
       <i class="fa fa-user-circle" aria-hidden="true"></i> {{ game_review.user_created}} </div>

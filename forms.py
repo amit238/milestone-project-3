@@ -29,11 +29,11 @@ class ReviewGameForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(),Length(min=1, max=150)])
     
     genre = SelectField(u'Genre', choices=[
-        ('action/adventure', 'Action/Adventure'),
-        ('sports', 'Sports'),
-        ('shooters', 'Shooters'),
-        ('role-playing', 'Role-Playing'),
-        ('racing', 'Racing'),
+        ('Action/Adventure', 'Action/Adventure'),
+        ('Sports', 'Sports'),
+        ('Shooters', 'Shooters'),
+        ('Role-playing', 'Role-Playing'),
+        ('Racing', 'Racing'),
         ])
     
     rating = SelectField(u'Rating', choices=[

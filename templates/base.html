@@ -16,8 +16,9 @@
 </head>
 
 <body>
+
   <header>
-    <nav class="navbar navbar-expand-lg navbar-custom bg-custom ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom ">
       <a class="navbar-brand" href="{{ url_for('index') }}">
        <img src="{{ url_for('static', filename='img/favicon.ico') }}" width="30" height="30" alt="">
   </a>
@@ -30,23 +31,38 @@
           {% if session['logged_in'] == True %}
           <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
           <a class="nav-item nav-link" href="{{ url_for('addreview') }}">Write a review</a>
-          <a class="nav-item nav-link" href="{{ url_for('logout') }}">Sign Out</a> 
-          {% else %}
+          <a class="nav-item nav-link" href="{{ url_for('logout') }}">Sign Out</a> {% else %}
           <a class="nav-item nav-link" href="{{ url_for('reviews') }}">Read a review</a>
           <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-          <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a> 
-          {% endif %}
+          <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a> {% endif %}
         </div>
       </div>
     </nav>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <span class="message">{{ message }}</span>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    {% block content %} {% endblock %}
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-lg-7">
+            <h1>Looking for a review?</h1>
+            <p>Use the search bar to help you out!</p>
+          </div>
+          <div class="col-lg-5">
+            <form class="input-group mb-3" action="{{ url_for('search') }}" method="POST">
+              <input class="form-control" type="text" name="query" />
+              <div class="input-group-append">
+                <button class="btn btn-dark" type="submit">Find a Review</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li class="alert-warning">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %} {% block content %} {% endblock %}
   </header>
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
