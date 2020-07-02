@@ -24,7 +24,7 @@ My main aim was to make the website very easy to use.By using Bootstrap Cards an
 
 ### Scope
 
-The scope of the website was for users to view or write their own game review, by using a structed form for both my add review and review pages.
+The scope of the website was for users to view or write their own game review, by using a structed form for both my add review and review pages. Users are also able to view other users reviews that they have made through the website.
 
 ### Structure
 
@@ -49,6 +49,8 @@ I focused on giving my pages a simple look by only providing two colours and one
 * Add Review - Allows users to create a game review
 * Edit/Delete Review - Users are able to edit and delete their review
 * Error Page - When theres an unexecpted error, user will be redirected to an 404 error page
+
+While doing a few of these events, a flash messages appears. For example when registering, once registered. A flash message will pop out saying "Registration Complete!"
 
 
 #### Features left to Implement
@@ -107,12 +109,6 @@ My Wireframe can be seen here
 
 When it came to testing i had used manual user testing, which was the primary testing for the application. I had asked a few people to go on to the website on different devices. The aim was for them to try and use all the functions on the website to see if there are any bugs in my website. With the feedback i was able to fix a lot of bugs that i didnt know existed.
 
-#### Validating
-
-To validate my code i had used the following:
-
-* https://validator.w3.org to validate my HTML
-* https://jigsaw.w3.org/css-validator to validate my CSS
 
 These tests were done throughtout my project which have also been tested on different web browsers which were:
 
@@ -159,11 +155,36 @@ The initial steps to link my webpage to my repository were as followed:
 3. Inside the terminal, I typed the following in this order `ls`, `git init`, `git add .` `git commit` this then created my initial commit.
 4. By using `git push` i was then able to link my page to a GitHub repository.
 
-When deploying this webpage i had used Heroku
+To clone my webpage the steps were as followed:
+
+1. You will need to go to my GitHub [Repo](https://github.com/amit238/milestone-project-3)
+2. On the right hand side you will be able to see a Clone or download dropdown button. Click that.
+3. Before downloading the website insure that Python3 is installed
+4. Create a virtual environment
+5. Run the requirements.txt and install the required packages in able to run the app.
+6. You may need to add on the env.py file the following:
+
+`os.environ["IP"] = "0.0.0.0"`
+
+` os.environ["PORT"] = "8080"`
+
+7. You should now be able to run the code.
+
+# Credits 
+
+* To my mentor for helping me throughout the project.
+* Using [Stack Overflow](https://stackoverflow.com/) and [W3Schools](w3schools.com)helping me understand Python a lot better
+
+### Media Used
+
+All images used was from google images
+
+All the descriptions i have on my reviews page are from [IGN](https://www.ign.com/uk)
 
 
+# Acknowledgements
 
-
+This project was inspired from the love i have for games. Since i was a child i was been in the gaming from world playing a wide range of different genres.
 
 
 

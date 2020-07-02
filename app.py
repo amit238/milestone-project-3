@@ -61,6 +61,7 @@ def login():
                              db_user['password']) == db_user['password']:
                 session['username'] = request.form['username']
                 session['logged_in'] = True
+                flash('You have successfully logged in!')
                 # successful redirect to home logged in
                 return redirect(url_for('index', title="Sign In", form=form))
             # must have failed set flash message
@@ -103,6 +104,7 @@ def register():
             session['username'] = request.form['username']
             session['logged_in'] = True
             # Logs user in after registering
+            flash('Registration Complete!')
             return redirect(url_for('index'))
         # duplcate username set flash message and reload page
         flash('Sorry, that username is already taken - use another')
@@ -121,7 +123,7 @@ def addreview():
    # If user gets onto the add page but not logged in
 
     if 'logged_in' not in session:
-        flash('To add a review you need to sign in', 'warning')
+        flash('To add a review you need to sign in')
         return redirect(url_for('login'))
 
    # If form submits successfully
@@ -201,33 +203,25 @@ def deletereview(id):
 
 @app.route('/search', methods=['POST'])
 def search():
-    
-    ''' 
-    The below line of code creates an index on each of the fields in the collection,
-    allowing us to perform a text search on them
-    '''
-    mongo.db.game_reviews.create_index([('description', 'text'), ('name','text'), ('genre', 'text')])
-    
-    
-    ''' 
-    The below line of code drops all indexes on a collection.
-    '''
-    # mongo.db.game_reviews.drop_indexes()
+    # This creates an index in each of the fields in the collect to perform a text search on them
+    mongo.db.game_reviews.create_index([('description', 'text'), ('name','text'), ('genre', 'text'),])
     
     query = request.form.get('query')
-    reviews = mongo.db.game_reviews.find({'$text': {'$search': query}})
-    return render_template('reviews.html', reviews=reviews, type='search', query=query)
+    game_reviews = mongo.db.game_reviews.find({'$text': {'$search': query}})
+    return render_template('reviews.html', game_reviews=game_reviews, type='search', query=query)
 
 
 
 
 # Adding a 404 error page
 
+''' If user goes onto a page that doesnt exist on the app '''
+
 @app.errorhandler(404)
 def handle_404(exception):
-    return render_template('404.html', exception=exception)
+    return render_template('404.html', exception=exception, title="404 Error")
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)

@@ -1,8 +1,13 @@
-  
-{% extends "base.html" %}
-{% block content %}
-    <h1>Oops...</h1>
-    <p>We seem to have lost that page, lets us help you get back to where you were <a href="{{ url_for('index', title="Home") }}">Home Page?</a></p>
-    <p>If you're interested the reason was:</p>
-    <p>{{ exception }}</p>
-{%  endblock %}
+ {% extends "base.html" %} {% block content %}
+<div class="jumbotron center-header">
+    <div class="row">
+        <div class="col-12">
+            <h1>Oops...</h1>
+            <p>We seem to have lost that page, lets us help you get back to where you were <a href="{{ url_for('index', title=" Home ") }}">Home Page?</a></p>
+            <p>If you're interested the reason was:</p>
+            <p>{{ exception }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+ 
