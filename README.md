@@ -1,4 +1,4 @@
-# Fly Away
+# GameScan
 
 Milestone Project 3 - Data Centric Development
 
